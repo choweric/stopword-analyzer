@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Challenge 3</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    button { margin-right: 0.5rem; }
+    #controls, #results { margin-top: 1rem; }
+  </style>
+  <script src="https://pub-7b5fe00ea58845aaac99f41c00eab522.r2.dev/stopword-analyzer.js"></script>
+</head>
+<body>
+  <h2>Challenge 3 Demo</h2>
+  <textarea id="input" rows="8" cols="80" placeholder="Input text here..."></textarea>
+  <div id="controls">
+    <button id="btn-clean">Process</button>
+  </div>
+  <div id="results"></div>
+
+  <script>
+    // Hard-coded stopword list (for demonstration)
+    const stopList = `i
+      me
+      my
+      myself
+      we
+      our
+      ours
+      ourselves
+      you
+      your
+      yours
+      yourself
+      yourselves
+      he
+      him
+      his
+      himself
+      she
+      her
+      hers
+      herself
+      it
+      its
+      itself
+      they
+      them
+      their
+      theirs
+      themselves
+      what
+      which
+      who
+      whom
+      this
+      that
+      these
+      those
+      am
+      is
+      are
+      was
+      were
+      be
+      been
+      being
+      have
+      has
+      had
+      having
+      do
+      does
+      did
+      doing
+      a
+      an
+      the
+      and
+      but
+      if
+      or
+      because
+      as
+      until
+      while
+      of
+      at
+      by
+      for
+      with
+      about
+      against
+      between
+      into
+      through
+      during
+      before
+      after
+      above
+      below
+      to
+      from
+      up
+      down
+      in
+      out
+      on
+      off
+      over
+      under
+      again
+      further
+      then
+      once
+      here
+      there
+      when
+      where
+      why
+      how
+      all
+      any
+      both
+      each
+      few
+      more
+      most
+      other
+      some
+      such
+      no
+      nor
+      not
+      only
+      own
+      same
+      so
+      than
+      too
+      very
+      can
+      will
+      just
+      should
+      now
+      even if
+      in fact
+      at all
+      for the most part`;
+
+    const analyzer = new StopwordAnalyzer(stopList);
+
+    // UI logic
+    document.getElementById('btn-clean').onclick = () => {
+      if (input.value==""){
+        alert("Please input some text first.")
+      }
+      else{
+        const { nonStops, ratio, stops } = analyzer.analyze(input.value);
+        results.innerHTML = `
+          <strong>Stopwords/Phrases Found (${stops.length}):</strong><br>${stops.join(', ')}
+          <br><br><strong>Non-Stopwords (${nonStops.length}):</strong> ${nonStops.join(', ')}
+          <br><br><strong>Stop / Non-Stop Ratio:</strong> <u><mark>${ratio===null? 'n/a (cannot divide by 0)':ratio.toFixed(3)}</mark></u>
+        `;
+      }
+    };
+    
+  </script>
+</body>
+</html>
