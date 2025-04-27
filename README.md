@@ -52,7 +52,3 @@ console.log(result);
 
 Open `demo.html` in your browser. Input text you wish you to process and press “Process” button. You can modify the hard-coded stopword strings in `demo.html`
 
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
